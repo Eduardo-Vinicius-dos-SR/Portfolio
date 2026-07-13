@@ -1,90 +1,88 @@
 # Portfólio
 
-Meu portfólio desenvolvido com **React** e **Vite**, com foco em apresentar meus projetos, habilidades e informações de contato de forma moderna, responsiva e intuitiva.
+Portfólio pessoal desenvolvido com **React**, **TypeScript** e **Vite**, criado para apresentar meus projetos, habilidades e experiências como desenvolvedor Front-end.
 
 ## Tecnologias
 
-- React
+- React 19
+- TypeScript
 - Vite
 - Tailwind CSS v4
-- React Icons
-- Framer Motion
 - React Scroll
+- Framer Motion
+- React Icons
+- ESLint
 
 ## Funcionalidades
 
-- Navegação suave entre as seções da página utilizando **React Scroll**.
-- Interface responsiva para dispositivos móveis e desktop.
-- Animações suaves com **Framer Motion**.
-- Ícones modernos com **React Icons**.
-- Layout organizado utilizando componentes React.
+- Navegação suave entre as seções utilizando **React Scroll**.
+- Interface responsiva.
+- Componentização com React.
+- Animações com **Framer Motion**.
+- Ícones utilizando **React Icons**.
+- Tipagem estática com **TypeScript**.
 
 ## Estrutura do projeto
 
 ```text
 src/
 ├── assets/
-├── App.jsx
-├── main.jsx
+├── components/
+│   └── NavItem/
+│       └── NavItem.tsx
+├── App.tsx
+├── main.tsx
 └── index.css
 ```
 
 ## Como executar o projeto
 
-### Clone o repositório
+Clone o repositório:
 
 ```bash
 git clone <url-do-repositório>
 ```
 
-### Entre na pasta
+Entre na pasta:
 
 ```bash
 cd nome-do-projeto
 ```
 
-### Instale as dependências
+Instale as dependências:
 
 ```bash
 npm install
 ```
 
-### Execute o projeto
+Execute o projeto:
 
 ```bash
 npm run dev
 ```
 
-O projeto será iniciado em:
+O projeto estará disponível em:
 
 ```text
 http://localhost:5173
 ```
 
-## 📦 Dependências principais
+## Objetivo
 
-```json
-{
-  "react": "...",
-  "vite": "...",
-  "tailwindcss": "...",
-  "react-icons": "...",
-  "framer-motion": "...",
-  "react-scroll": "..."
-}
-```
+Este projeto tem como objetivo servir como meu portfólio pessoal, reunindo projetos, experiências e conhecimentos em desenvolvimento Front-end utilizando tecnologias modernas.
 
-## 🎯 Objetivo
+## Roadmap
 
-Este projeto foi desenvolvido para reunir meus principais projetos, demonstrar minhas habilidades em desenvolvimento front-end e servir como meu portfólio pessoal.
-
-## ToDos
-
-- [ ] Adicionar seção "Sobre mim"
-- [ ] Adicionar seção de habilidades
-- [ ] Criar cards de projetos
+- [x] Configurar React + Vite
+- [x] Migrar o projeto para TypeScript
+- [x] Configurar Tailwind CSS v4
+- [x] Criar a estrutura inicial do Header
+- [x] Implementar navegação com React Scroll
+- [ ] Desenvolver a seção Hero
+- [ ] Desenvolver a seção Sobre
+- [ ] Desenvolver a seção Projetos
+- [ ] Desenvolver a seção Habilidades
+- [ ] Desenvolver a seção Contato
+- [ ] Adicionar animações com Framer Motion
 - [ ] Implementar modo claro/escuro
-- [ ] Adicionar animações de entrada
-- [ ] Criar formulário de contato
-- [ ] Adicionar links para GitHub e LinkedIn
-- [ ] Fazer deploy na Vercel
+- [ ] Publicar o projeto na Vercel
