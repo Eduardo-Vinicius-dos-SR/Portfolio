@@ -7,9 +7,9 @@ function App() {
 
   return (
     <div className="App">
-      <header className='flex'>
-        <h1>Eduardo Vinícius</h1>
-        <ul>
+      <header className='w-full fixed flex px-9 py-5 justify-between items-center border-b border-b-gray-300'>
+        <h1 className='text-3xl font-bold'>Eduardo Vinícius</h1>
+        <ul className='flex justify-between items-center gap-10 mr-14'>
           <li><Link
             to="home"
             smooth={true}
