@@ -1,52 +1,24 @@
 import { useState } from 'react'
 import './App.css'
 import { Link } from 'react-scroll'
+import NavItem from './components/NavItem/NavItem'
 
 function App() {
 
 
   return (
     <div className="App">
-      <header className='w-full fixed flex px-9 py-5 justify-between items-center border-b border-b-gray-300'>
-        <h1 className='text-3xl font-bold'>Eduardo Vinícius</h1>
+      <header className='w-full fixed flex flex-row px-9 py-5 justify-between items-center border-b border-b-gray-300'>
+        <h1 className='text-3xl font-bold'><a href="https://www.linkedin.com/in/eduardo-vinícius-dos-santos-r-719955336/" target="_blank"
+          rel="noopener noreferrer">Eduardo Vinícius</a></h1>
         <ul className='flex justify-between items-center gap-10 mr-14'>
-          <li><Link
-            to="home"
-            smooth={true}
-            duration={500}
-            className='cursor-pointer'
-          >
-            Home
-          </Link></li>
-
-          <li><Link
-            to="projects"
-            smooth={true}
-            duration={500}
-            className='cursor-pointer'
-          >
-            Projectos
-          </Link></li>
-
-          <li><Link
-            to="about"
-            smooth={true}
-            duration={500}
-            className='cursor-pointer'
-          >
-            Sobre
-          </Link></li>
-
-          <li><Link
-            to="contact"
-            smooth={true}
-            duration={500}
-            className='cursor-pointer'
-          >
-            Contact
-          </Link></li>
+          <NavItem to='home'>Home</NavItem>
+          <NavItem to='projects'>Projectos</NavItem>
+          <NavItem to='about'>Sobre</NavItem>
+          <NavItem to='contact'>Contato</NavItem>
         </ul>
       </header>
+
       <section id="home">
         {/* <Hero /> */}
       </section>
