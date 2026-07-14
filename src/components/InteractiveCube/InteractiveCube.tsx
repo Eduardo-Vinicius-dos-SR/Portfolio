@@ -44,12 +44,13 @@ function CubeFace({ data, hoveredKey, setHoveredKey, onSelect }: { data: FaceDat
     )
 }
 
-function Cube({ targetRef, rotRef, idleRef, dragging, onSelect }: {
+function Cube({ targetRef, rotRef, idleRef, dragging, onSelect, activeKey }: {
     targetRef: React.RefObject<{ x: number; y: number } | null>;
     rotRef: React.RefObject<{ x: number; y: number }>;
     idleRef: React.RefObject<boolean>;
     dragging: boolean;
     onSelect: (face: FaceData) => void;
+    activeKey: string | null
 }) {
     const cube = useRef<Group | null>(null)
     const [hoveredKey, setHoveredKey] = useState<string | null>(null)
@@ -65,7 +66,7 @@ function Cube({ targetRef, rotRef, idleRef, dragging, onSelect }: {
                 rotRef.current = { ...t };
                 targetRef.current = null
             }
-        } else if (idleRef.current && !dragging) {
+        } else if (idleRef.current && !dragging && !activeKey) {
             rotRef.current.y += 0.01;
         }
         cube.current.rotation.x = rotRef.current.x;
@@ -89,11 +90,20 @@ export default function InteractiveCube() {
     const targetRef = useRef<{ x: number; y: number } | null>(null)
     const [activeKey, setActiveKey] = useState<string | null>(null)
     const movedRef = useRef(false);
+    const idleTimer = useRef<number | null>(null);
+
+    function scheduleIdleResume() {
+        if (idleTimer.current) clearTimeout(idleTimer.current)
+        idleTimer.current = window.setTimeout(() => {
+            idleRef.current = true
+        }, 1500)
+    }
 
 
     const handleSelectFace = (face: FaceData) => {
         idleRef.current = false;
         targetRef.current = { x: face.snap[0], y: face.snap[1] };
+        scheduleIdleResume()
         setActiveKey(face.key)
     }
 
@@ -105,7 +115,8 @@ export default function InteractiveCube() {
     const onPointerDown = (e: React.PointerEvent) => {
         dragStart.current = { x: e.clientX, y: e.clientY, rx: rotRef.current.x, ry: rotRef.current.y };
         idleRef.current = false;
-        movedRef.current = false
+        movedRef.current = false;
+        scheduleIdleResume()
         setDragging(true)
     }
 
@@ -121,6 +132,8 @@ export default function InteractiveCube() {
                 setActiveKey(null)
             }
 
+            scheduleIdleResume();
+
             rotRef.current = {
                 x: dragStart.current.rx - dy * 0.006,
                 y: dragStart.current.ry - dx * 0.006,
@@ -135,13 +148,19 @@ export default function InteractiveCube() {
         }
     }, [dragging]);
 
+    useEffect(() => {
+        return () => {
+            if (idleTimer.current) clearTimeout(idleTimer.current);
+        };
+    }, []);
+
     return (
         <div className="flex flex-col items center gap-6">
             <div className="h-160 w-200" onPointerDown={onPointerDown} style={{ cursor: dragging ? "grabbing" : "grab", touchAction: "none" }}>
                 <Canvas camera={{ position: [0, 0, 8], fov: 65 }}>
                     <ambientLight />
                     <directionalLight position={[3, 4, 5]} />
-                    <Cube targetRef={targetRef} rotRef={rotRef} idleRef={idleRef} dragging={dragging} onSelect={handleSelectFace} />
+                    <Cube targetRef={targetRef} rotRef={rotRef} idleRef={idleRef} dragging={dragging} onSelect={handleSelectFace} activeKey={activeKey} />
                 </Canvas>
             </div>
 
