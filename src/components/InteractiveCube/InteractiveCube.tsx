@@ -88,6 +88,8 @@ function Cube({ targetRef, rotRef, idleRef, dragging, onSelect }: {
 export default function InteractiveCube() {
     const targetRef = useRef<{ x: number; y: number } | null>(null)
     const [activeKey, setActiveKey] = useState<string | null>(null)
+    const movedRef = useRef(false);
+
 
     const handleSelectFace = (face: FaceData) => {
         idleRef.current = false;
@@ -102,7 +104,8 @@ export default function InteractiveCube() {
 
     const onPointerDown = (e: React.PointerEvent) => {
         dragStart.current = { x: e.clientX, y: e.clientY, rx: rotRef.current.x, ry: rotRef.current.y };
-        idleRef.current = false
+        idleRef.current = false;
+        movedRef.current = false
         setDragging(true)
     }
 
@@ -112,6 +115,12 @@ export default function InteractiveCube() {
             if (!dragStart.current) return;
             const dx = e.clientX - dragStart.current.x;
             const dy = e.clientY - dragStart.current.y;
+            if (!movedRef.current && (Math.abs(dx) + Math.abs(dy) > 4)) {
+                movedRef.current = true;
+                targetRef.current = null;
+                setActiveKey(null)
+            }
+
             rotRef.current = {
                 x: dragStart.current.rx - dy * 0.006,
                 y: dragStart.current.ry - dx * 0.006,
@@ -127,11 +136,19 @@ export default function InteractiveCube() {
     }, [dragging]);
 
     return (
-        <div className="h-160 w-200" onPointerDown={onPointerDown} style={{ cursor: dragging ? "grabbing" : "grab", touchAction: "none" }}>
-            <Canvas camera={{ position: [0, 0, 8], fov: 65 }}>
-                <ambientLight />
-                <directionalLight position={[3, 4, 5]} />
-                <Cube targetRef={targetRef} rotRef={rotRef} idleRef={idleRef} dragging={dragging} onSelect={handleSelectFace} />
-            </Canvas>
+        <div className="flex flex-col items center gap-6">
+            <div className="h-160 w-200" onPointerDown={onPointerDown} style={{ cursor: dragging ? "grabbing" : "grab", touchAction: "none" }}>
+                <Canvas camera={{ position: [0, 0, 8], fov: 65 }}>
+                    <ambientLight />
+                    <directionalLight position={[3, 4, 5]} />
+                    <Cube targetRef={targetRef} rotRef={rotRef} idleRef={idleRef} dragging={dragging} onSelect={handleSelectFace} />
+                </Canvas>
+            </div>
+
+            {activeKey && (
+                <div className="rounded-2x1 bg-black/40 p-6 text-white">
+                    Face Selecionada: {activeKey}
+                </div>
+            )}
         </div>)
 }
