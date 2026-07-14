@@ -1,8 +1,12 @@
 import { Html } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
-import { FaEnvelope, FaRadiation, FaWhatsapp } from "react-icons/fa";
-import { FaArrowDown, FaFaceGrin, FaUpwork } from "react-icons/fa6";
+import { BsCodeSlash } from "react-icons/bs";
+import { FaFaceGrin } from "react-icons/fa6";
+import { IoPersonOutline } from "react-icons/io5";
+import { LuMessageCircleMore, LuSparkles } from "react-icons/lu";
+import { PiStudent } from "react-icons/pi";
+import { SiReact } from "react-icons/si";
 import { Group } from "three";
 
 type FaceData = {
@@ -11,18 +15,20 @@ type FaceData = {
     rotation: [number, number, number];
     snap: [number, number];
     icon: typeof FaFaceGrin;
+    name: string
 }
 
 const FACES: FaceData[] = [
-    { key: "front", position: [0, 0, 1.5], rotation: [0, 0, 0], snap: [0, 0], icon: FaWhatsapp },
-    { key: "right", position: [1.5, 0, 0], rotation: [0, Math.PI / 2, 0], snap: [0, -Math.PI / 2], icon: FaWhatsapp },
-    { key: "back", position: [0, 0, -1.5], rotation: [0, Math.PI, 0], snap: [0, Math.PI], icon: FaUpwork },
-    { key: "left", position: [-1.5, 0, 0], rotation: [0, -Math.PI / 2, 0], snap: [0, Math.PI / 2], icon: FaEnvelope },
-    { key: "top", position: [0, 1.5, 0], rotation: [-Math.PI / 2, 0, 0], snap: [Math.PI / 2, 0], icon: FaRadiation },
-    { key: "bottom", position: [0, -1.5, 0], rotation: [Math.PI / 2, 0, 0], snap: [-Math.PI / 2, 0], icon: FaArrowDown },
+    { key: "front", position: [0, 0, 1.5], rotation: [0, 0, 0], snap: [0, 0], icon: BsCodeSlash, name: "Projetos" },
+    { key: "right", position: [1.5, 0, 0], rotation: [0, Math.PI / 2, 0], snap: [0, -Math.PI / 2], icon: LuMessageCircleMore, name: "Contato" },
+    { key: "top", position: [0, 1.5, 0], rotation: [-Math.PI / 2, 0, 0], snap: [Math.PI / 2, 0], icon: IoPersonOutline, name: "Sobre" },
+    { key: "left", position: [-1.5, 0, 0], rotation: [0, -Math.PI / 2, 0], snap: [0, Math.PI / 2], icon: SiReact, name: "Tecnologias" },
+    { key: "back", position: [0, 0, -1.5], rotation: [0, Math.PI, 0], snap: [0, Math.PI], icon: PiStudent, name: "Formação" },
+    { key: "bottom", position: [0, -1.5, 0], rotation: [Math.PI / 2, 0, 0], snap: [-Math.PI / 2, 0], icon: LuSparkles, name: "Skills" },
+    // adicionar color
 ]
 
-function CubeFace({ data, hoveredKey, setHoveredKey, onSelect }: { data: FaceData; hoveredKey: string | null; setHoveredKey: (k: string | null) => void; onSelect: (face: FaceData) => void; }) {
+function CubeFace({ data, hoveredKey, setHoveredKey, onSelect, activeKey }: { data: FaceData; hoveredKey: string | null; setHoveredKey: (k: string | null) => void; onSelect: (face: FaceData) => void; activeKey: string | null }) {
     const Icon = data.icon
     const hovered = hoveredKey === data.key
 
@@ -36,8 +42,9 @@ function CubeFace({ data, hoveredKey, setHoveredKey, onSelect }: { data: FaceDat
             <planeGeometry args={[3, 3]} />
             <meshBasicMaterial transparent opacity={0} />
             <Html center occlude={false} style={{ pointerEvents: "none" }}>
-                <div style={{ opacity: hovered ? 1 : 0, transition: "opacity 0.3s" }}>
+                <div className={`flex flex-col items-center transition-opacity duration-300 ${activeKey == data.key ? "opacity-100" : hovered ? "opacity-100" : "opacity-0"}`}>
                     <Icon color="yellow" size={50} />
+                    <p>{data.name}</p>
                 </div>
             </Html>
         </mesh>
@@ -80,7 +87,7 @@ function Cube({ targetRef, rotRef, idleRef, dragging, onSelect, activeKey }: {
                 <meshStandardMaterial color="orange" />
             </mesh>
             {FACES.map((face) => (
-                <CubeFace key={face.key} data={face} hoveredKey={hoveredKey} setHoveredKey={setHoveredKey} onSelect={onSelect} />
+                <CubeFace key={face.key} data={face} hoveredKey={hoveredKey} setHoveredKey={setHoveredKey} onSelect={onSelect} activeKey={activeKey} />
             ))}
         </group>
     )
@@ -96,7 +103,7 @@ export default function InteractiveCube() {
         if (idleTimer.current) clearTimeout(idleTimer.current)
         idleTimer.current = window.setTimeout(() => {
             idleRef.current = true
-        }, 1500)
+        }, 12000)
     }
 
 
@@ -164,10 +171,11 @@ export default function InteractiveCube() {
                 </Canvas>
             </div>
 
-            {activeKey && (
-                <div className="rounded-2x1 bg-black/40 p-6 text-white">
-                    Face Selecionada: {activeKey}
-                </div>
-            )}
-        </div>)
+            <div className="flex gap-5 rounded-2x1 bg-black/40 p-6 text-white">
+                {FACES.map((face, index) => {
+                    const isActive = activeKey == face.key
+                    return (<button onClick={() => { handleSelectFace(FACES[index]); }} className={`flex items-center gap-2 ${isActive ? "text-black" : ""}`} >{index + 1}.{<face.icon />} {face.name}</button>)
+                })}
+            </div>
+        </div >)
 }
