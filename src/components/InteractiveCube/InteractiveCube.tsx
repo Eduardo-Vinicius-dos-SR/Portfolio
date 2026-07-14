@@ -30,8 +30,6 @@ const FACES: FaceData[] = [
 
 function CubeFace({ data, hoveredKey, setHoveredKey, onSelect, activeKey }: { data: FaceData; hoveredKey: string | null; setHoveredKey: (k: string | null) => void; onSelect: (face: FaceData) => void; activeKey: string | null }) {
     const Icon = data.icon
-    const hovered = hoveredKey === data.key
-
     return (
         <mesh
             position={data.position}
@@ -42,7 +40,7 @@ function CubeFace({ data, hoveredKey, setHoveredKey, onSelect, activeKey }: { da
             <planeGeometry args={[3, 3]} />
             <meshBasicMaterial transparent opacity={0} />
             <Html center occlude={false} style={{ pointerEvents: "none" }}>
-                <div className={`flex flex-col items-center transition-opacity duration-300 ${activeKey == data.key ? "opacity-100" : hovered ? "opacity-100" : "opacity-0"}`}>
+                <div className={`flex flex-col items-center transition-opacity duration-300 ${activeKey == data.key ? "opacity-100" : hoveredKey == data.key ? "opacity-100" : "opacity-0"}`}>
                     <Icon color="yellow" size={50} />
                     <p>{data.name}</p>
                 </div>
@@ -51,16 +49,17 @@ function CubeFace({ data, hoveredKey, setHoveredKey, onSelect, activeKey }: { da
     )
 }
 
-function Cube({ targetRef, rotRef, idleRef, dragging, onSelect, activeKey }: {
+function Cube({ targetRef, rotRef, idleRef, dragging, onSelect, activeKey, hoveredKey, setHoveredKey }: {
     targetRef: React.RefObject<{ x: number; y: number } | null>;
     rotRef: React.RefObject<{ x: number; y: number }>;
     idleRef: React.RefObject<boolean>;
     dragging: boolean;
     onSelect: (face: FaceData) => void;
-    activeKey: string | null
+    activeKey: string | null;
+    hoveredKey: string | null;
+    setHoveredKey: (key: string | null) => void;
 }) {
     const cube = useRef<Group | null>(null)
-    const [hoveredKey, setHoveredKey] = useState<string | null>(null)
 
     useFrame(() => {
         if (!cube.current) return;
@@ -98,6 +97,8 @@ export default function InteractiveCube() {
     const [activeKey, setActiveKey] = useState<string | null>(null)
     const movedRef = useRef(false);
     const idleTimer = useRef<number | null>(null);
+    const [hoveredKey, setHoveredKey] = useState<string | null>(null)
+
 
     function scheduleIdleResume() {
         if (idleTimer.current) clearTimeout(idleTimer.current)
@@ -167,14 +168,20 @@ export default function InteractiveCube() {
                 <Canvas camera={{ position: [0, 0, 8], fov: 65 }}>
                     <ambientLight />
                     <directionalLight position={[3, 4, 5]} />
-                    <Cube targetRef={targetRef} rotRef={rotRef} idleRef={idleRef} dragging={dragging} onSelect={handleSelectFace} activeKey={activeKey} />
+                    <Cube targetRef={targetRef} rotRef={rotRef} idleRef={idleRef} dragging={dragging} onSelect={handleSelectFace} activeKey={activeKey} hoveredKey={hoveredKey} setHoveredKey={setHoveredKey} />
                 </Canvas>
             </div>
 
-            <div className="flex gap-5 rounded-2x1 bg-black/40 p-6 text-white">
+            <div className="flex gap-5 rounded-2x1 p-6 text-sm">
                 {FACES.map((face, index) => {
                     const isActive = activeKey == face.key
-                    return (<button onClick={() => { handleSelectFace(FACES[index]); }} className={`flex items-center gap-2 ${isActive ? "text-black" : ""}`} >{index + 1}.{<face.icon />} {face.name}</button>)
+                    return (
+                    <button onClick={() => { handleSelectFace(FACES[index]); }} 
+                    onMouseEnter={() => setHoveredKey(face.key)} 
+                    onMouseLeave={() => setHoveredKey(null)} 
+                    className={`flex items-center gap-2 ${isActive? "" : hoveredKey == face.key ? "text-yellow-400" : ""} hover:text-yellow-400 rounded-2xl border py-1 px-2 ${isActive ? "text-[var(--accent)]" : "text-[var(--text-h)]"}`} >
+                        {index + 1} {<face.icon />} {face.name}
+                    </button>)
                 })}
             </div>
         </div >)

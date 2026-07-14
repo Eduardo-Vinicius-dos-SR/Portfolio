@@ -9,11 +9,10 @@ interface NavItemProps {
 export default function NavItem({ to, children }: NavItemProps) {
   return (
     <li>
-      <Link
-        to={to}
+      <Link to={to}
         smooth
-        duration={500}
-        className=" relative pb-1
+        duration={500}>
+           <p className=" relative pb-1
     cursor-pointer
     after:absolute
     after:left-1/2
@@ -21,13 +20,13 @@ export default function NavItem({ to, children }: NavItemProps) {
     after:h-[2px]
     after:w-0
     after:-translate-x-1/2
-    after:bg-black
+    after:bg-[var(--text-h)]
     after:transition-all
     after:duration-300
     hover:after:w-full
-    hover:text-black"
-      >
-        {children}
+    hover:text-[var(--text-h)]"
+        >
+          {children}</p>
       </Link>
     </li>
   );
