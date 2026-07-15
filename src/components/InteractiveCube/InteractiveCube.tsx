@@ -1,13 +1,13 @@
 import { Html } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { BsCodeSlash } from "react-icons/bs";
 import { FaFaceGrin } from "react-icons/fa6";
 import { IoPersonOutline } from "react-icons/io5";
 import { LuMessageCircleMore, LuSparkles } from "react-icons/lu";
 import { PiStudent } from "react-icons/pi";
 import { SiReact } from "react-icons/si";
-import { Group } from "three";
+import { CanvasTexture, Group } from "three";
 
 type FaceData = {
     key: string;
@@ -49,7 +49,35 @@ function CubeFace({ data, hoveredKey, setHoveredKey, onSelect, activeKey }: { da
     )
 }
 
-function Cube({ targetRef, rotRef, idleRef, dragging, onSelect, activeKey, hoveredKey, setHoveredKey }: {
+function useGradientTexture() {
+    return useMemo(() => {
+        const canvas = document.createElement("canvas")
+        canvas.width = 256;
+        canvas.height = 256;
+        const ctx = canvas.getContext("2d")
+        if (!ctx) return new CanvasTexture(canvas)
+
+        const angleRad = (140 * Math.PI) / 180
+        const cx = canvas.width / 2;
+        const cy = canvas.height / 2;
+        const x1 = cx - Math.cos(angleRad) * cx;
+        const y1 = cy - Math.sin(angleRad) * cy;
+        const x2 = cx + Math.cos(angleRad) * cx;
+        const y2 = cy + Math.sin(angleRad) * cy;
+
+        const gradient = ctx.createLinearGradient(x1, y1, x2, y2);
+        gradient.addColorStop(0, "rgba(62, 6, 6, 0.85)");
+        gradient.addColorStop(1, "rgba(45, 12, 54, 0.9)");
+
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        const texture = new CanvasTexture(canvas);
+        return texture
+    }, [])
+}
+
+function Cube({ targetRef, rotRef, idleRef, dragging, onSelect, activeKey, hoveredKey, setHoveredKey, onPointerDown }: {
     targetRef: React.RefObject<{ x: number; y: number } | null>;
     rotRef: React.RefObject<{ x: number; y: number }>;
     idleRef: React.RefObject<boolean>;
@@ -58,8 +86,10 @@ function Cube({ targetRef, rotRef, idleRef, dragging, onSelect, activeKey, hover
     activeKey: string | null;
     hoveredKey: string | null;
     setHoveredKey: (key: string | null) => void;
+    onPointerDown: (e: React.PointerEvent) => void;
 }) {
     const cube = useRef<Group | null>(null)
+    const gradientTexture = useGradientTexture();
 
     useFrame(() => {
         if (!cube.current) return;
@@ -81,9 +111,9 @@ function Cube({ targetRef, rotRef, idleRef, dragging, onSelect, activeKey, hover
 
     return (
         <group ref={cube}>
-            <mesh>
+            <mesh onPointerDown={(e: React.PointerEvent) => { e.stopPropagation(); onPointerDown(e); }}>
                 <boxGeometry args={[3, 3, 3]} />
-                <meshStandardMaterial color="orange" />
+                <meshStandardMaterial map={gradientTexture} />
             </mesh>
             {FACES.map((face) => (
                 <CubeFace key={face.key} data={face} hoveredKey={hoveredKey} setHoveredKey={setHoveredKey} onSelect={onSelect} activeKey={activeKey} />
@@ -162,13 +192,16 @@ export default function InteractiveCube() {
         };
     }, []);
 
+    const hoveringCube = hoveredKey !== null;
+
     return (
         <div className="flex flex-col items center gap-6">
-            <div className="h-160 w-200" onPointerDown={onPointerDown} style={{ cursor: dragging ? "grabbing" : "grab", touchAction: "none" }}>
+            <div className="h-160 w-200"
+    style={{ touchAction: "none", cursor: dragging ? "grabbing" : hoveringCube ? "grab" : "default" }}>
                 <Canvas camera={{ position: [0, 0, 8], fov: 65 }}>
                     <ambientLight />
                     <directionalLight position={[3, 4, 5]} />
-                    <Cube targetRef={targetRef} rotRef={rotRef} idleRef={idleRef} dragging={dragging} onSelect={handleSelectFace} activeKey={activeKey} hoveredKey={hoveredKey} setHoveredKey={setHoveredKey} />
+                    <Cube targetRef={targetRef} rotRef={rotRef} onPointerDown={onPointerDown} idleRef={idleRef} dragging={dragging} onSelect={handleSelectFace} activeKey={activeKey} hoveredKey={hoveredKey} setHoveredKey={setHoveredKey} />
                 </Canvas>
             </div>
 
@@ -176,12 +209,12 @@ export default function InteractiveCube() {
                 {FACES.map((face, index) => {
                     const isActive = activeKey == face.key
                     return (
-                    <button onClick={() => { handleSelectFace(FACES[index]); }} 
-                    onMouseEnter={() => setHoveredKey(face.key)} 
-                    onMouseLeave={() => setHoveredKey(null)} 
-                    className={`flex items-center gap-2 ${isActive? "" : hoveredKey == face.key ? "text-yellow-400" : ""} hover:text-yellow-400 rounded-2xl border py-1 px-2 ${isActive ? "text-[var(--accent)]" : "text-[var(--text-h)]"}`} >
-                        {index + 1} {<face.icon />} {face.name}
-                    </button>)
+                        <button onClick={() => { handleSelectFace(FACES[index]); }}
+                            onMouseEnter={() => setHoveredKey(face.key)}
+                            onMouseLeave={() => setHoveredKey(null)}
+                            className={`flex items-center gap-2 ${isActive ? "" : hoveredKey == face.key ? "text-yellow-400" : ""} rounded-2xl border py-1 px-2 ${isActive ? "text-[var(--accent)]" : "text-[var(--text-h)]"} cursor-pointer`} >
+                            {index + 1} {<face.icon />} {face.name}
+                        </button>)
                 })}
             </div>
         </div >)
