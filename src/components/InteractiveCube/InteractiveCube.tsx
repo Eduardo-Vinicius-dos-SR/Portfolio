@@ -195,9 +195,9 @@ export default function InteractiveCube() {
     const hoveringCube = hoveredKey !== null;
 
     return (
-        <div className="flex flex-col items center gap-6">
+        <div className="w-full flex flex-col items-center gap-6 bg-white/3 pt-6 pb-12 border-y border-orange-300 backdrop-blur-lg">
             <div className="h-160 w-200"
-    style={{ touchAction: "none", cursor: dragging ? "grabbing" : hoveringCube ? "grab" : "default" }}>
+                style={{ touchAction: "none", cursor: dragging ? "grabbing" : hoveringCube ? "grab" : "default" }}>
                 <Canvas camera={{ position: [0, 0, 8], fov: 65 }}>
                     <ambientLight />
                     <directionalLight position={[3, 4, 5]} />
@@ -212,7 +212,7 @@ export default function InteractiveCube() {
                         <button onClick={() => { handleSelectFace(FACES[index]); }}
                             onMouseEnter={() => setHoveredKey(face.key)}
                             onMouseLeave={() => setHoveredKey(null)}
-                            className={`flex items-center gap-2 ${isActive ? "" : hoveredKey == face.key ? "text-yellow-400" : ""} rounded-2xl border py-1 px-2 ${isActive ? "text-[var(--accent)]" : "text-[var(--text-h)]"} cursor-pointer`} >
+                            className={`flex items-center gap-2 ${isActive ? "" : hoveredKey == face.key ? "text-yellow-400" : ""} duration-300ms ease-in transition-all rounded-2xl border py-1 px-2 ${isActive ? "text-[var(--accent)]" : "text-[var(--text-h)]"} cursor-pointer`} >
                             {index + 1} {<face.icon />} {face.name}
                         </button>)
                 })}
