@@ -2,22 +2,14 @@ import { Html } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { BsCodeSlash } from "react-icons/bs";
-import { FaFaceGrin } from "react-icons/fa6";
 import { IoPersonOutline } from "react-icons/io5";
 import { LuMessageCircleMore, LuSparkles } from "react-icons/lu";
 import { PiStudent } from "react-icons/pi";
 import { SiReact } from "react-icons/si";
 import { CanvasTexture, Group } from "three";
 import { useSection, type SectionKey } from "../../context/SectionContext";
+import type { FaceData } from "../../types/faceData";
 
-type FaceData = {
-    key: string;
-    position: [number, number, number];
-    rotation: [number, number, number];
-    snap: [number, number];
-    icon: typeof FaFaceGrin;
-    name: string
-}
 
 const FACES: FaceData[] = [
     { key: "projects", position: [0, 0, 1.5], rotation: [0, 0, 0], snap: [0, 0], icon: BsCodeSlash, name: "Projetos" },
@@ -40,9 +32,9 @@ function CubeFace({ data, hoveredKey, setHoveredKey, onSelect, activeSection }: 
             onClick={(e) => { e.stopPropagation(); onSelect(data); }}>
             <planeGeometry args={[3, 3]} />
             <meshBasicMaterial transparent opacity={0} />
-            <Html center occlude={false} style={{ pointerEvents: "none" }}>
+            <Html center occlude={false} zIndexRange={[10, 0]} style={{ pointerEvents: "none" }}>
                 <div className={`flex flex-col items-center transition-opacity duration-300 ${activeSection == data.key ? "opacity-100" : hoveredKey == data.key ? "opacity-100" : "opacity-0"}`}>
-                    <Icon color="yellow" size={50} />
+                    <Icon className="z-50" color="yellow" size={50} />
                     <p>{data.name}</p>
                 </div>
             </Html>

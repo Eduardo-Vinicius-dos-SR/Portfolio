@@ -21,7 +21,7 @@ const SECTION_COMPONENTS: Record<string, React.ReactNode> = {
 };
 
 function App() {
-  const { activeSection, setActiveSection } = useSection()
+  const { activeSection } = useSection()
 
   useEffect(() => {
     if (activeSection !== 'home') return;

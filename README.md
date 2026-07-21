@@ -78,12 +78,12 @@ Este projeto tem como objetivo servir como meu portfólio pessoal, reunindo proj
 - [x] Configurar Tailwind CSS v4
 - [x] Criar a estrutura inicial do Header
 - [x] Implementar navegação com React Scroll
-- [ ] Desenvolver a seção Hero
-- [ ] Desenvolver a seção Sobre
-- [ ] Desenvolver a seção Projetos
+- [x] Desenvolver a seção Hero
+- [x] Desenvolver a seção Sobre
+- [x] Desenvolver a seção Projetos
 - [ ] Desenvolver a seção Habilidades
-- [ ] Desenvolver a seção Contato
-- [ ] Adicionar animações com Framer Motion
+- [x] Desenvolver a seção Contato
+- [x] Adicionar animações com Framer Motion
 - [ ] Implementar modo claro/escuro
 - [ ] Implementar responsividade
 - [ ] Publicar o projeto na Vercel

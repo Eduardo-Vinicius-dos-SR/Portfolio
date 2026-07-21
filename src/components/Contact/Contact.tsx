@@ -1,10 +1,11 @@
 import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 import ContactItem from "../ContactItem/ContactItem";
+import { LuMessageCircleMore } from "react-icons/lu";
 
 export default function Contact() {
     return (
         <section id="contact" className="min-h-[921px] flex flex-col items-start gap-4 text-center p-20">
-            <h2 className='text-3xl font-bold text-center self-center'>Meus contatos</h2>
+            <h2 className='flex justify-center text-3xl font-bold text-center self-center'><LuMessageCircleMore className='mr-5 text-4xl' /> Meus contatos</h2>
             <ul className='flex flex-wrap justify-center gap-24 p-20'>
                 <ContactItem href="https://www.linkedin.com/in/eduardo-vinícius-dos-santos-r-719955336/" title="LinkedIn" description="Acesse meu perfil no LinkedIn" ><FaLinkedin /></ContactItem>
                 <ContactItem href="https://github.com/Eduardo-Vinicius-dos-SR/" title="GitHub" description="Veja meu trabalho no GitHub" ><FaGithub /></ContactItem>
