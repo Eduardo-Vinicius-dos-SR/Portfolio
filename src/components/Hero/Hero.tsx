@@ -3,7 +3,7 @@ import InteractiveCube from "../InteractiveCube/InteractiveCube";
 
 export default function Hero() {
     return (
-        <section id="home" className="hero pt-40 pb-20 relative flex flex-col justify-center items-center gap-25 bg-white/3 border-b border-orange-300">
+        <main id="home" className="hero pt-40 pb-20 relative flex flex-col justify-center items-center gap-25 bg-white/3">
  
             <div className='h-[80dvh] max-h-screen flex flex-col gap-40 items-center justify-evenly text-center'>
                 <div className='flex flex-col gap-4 items-center justify-center'>
@@ -21,6 +21,6 @@ export default function Hero() {
             </div>
             <InteractiveCube />
 
-        </section>
+        </main>
     )
 }

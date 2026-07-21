@@ -16,7 +16,7 @@ export default function ProjectPreview({ url }: { url: string }) {
     <img
       src={screenshotUrl}
       alt="Preview do site"
-      className={"flex aspect-video rounded-lg border border-[var(--border)]"}
+      className={"flex aspect-video rounded-lg border border-[var(--border)] transition-transform duration-300 hover:scale-120"}
       loading="lazy"
     />
   );
