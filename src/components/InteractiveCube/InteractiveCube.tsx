@@ -195,7 +195,7 @@ export default function InteractiveCube() {
     const hoveringCube = hoveredKey !== null;
 
     return (
-        <div className="w-full flex flex-col items-center gap-6 bg-white/3 pt-6 pb-12 border-y border-orange-300 backdrop-blur-lg">
+        <div className="w-full flex flex-col items-center gap-6 pt-6 pb-12 backdrop-blur-lg border-t border-orange-300">
             <div className="h-160 w-200"
                 style={{ touchAction: "none", cursor: dragging ? "grabbing" : hoveringCube ? "grab" : "default" }}>
                 <Canvas camera={{ position: [0, 0, 8], fov: 65 }}>
