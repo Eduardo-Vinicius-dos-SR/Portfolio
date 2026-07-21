@@ -1,6 +1,6 @@
-export default function About({active= false}) {
+export default function About() {
     return(
-        <section id="about" className={`${active ? 'flex' : 'hidden'} flex-col items-center justify-center gap-4 p-6 text-center`}>
+        <section id="about" className="flex flex-col items-center justify-center gap-4 p-6 text-center">
         </section>
     )
 }

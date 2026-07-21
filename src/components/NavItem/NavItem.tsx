@@ -1,18 +1,21 @@
-import { Link } from "react-scroll";
+import { scroller } from "react-scroll";
 import type { ReactNode } from "react";
+import { useSection, type SectionKey } from "../../context/SectionContext";
 
 interface NavItemProps {
-  to: string;
+  to: SectionKey;
   children: ReactNode;
 }
 
 export default function NavItem({ to, children }: NavItemProps) {
+  const { setActiveSection } = useSection()
+
   return (
     <li>
-      <Link to={to}
-        smooth
-        duration={500}>
-           <p className=" relative pb-1
+      <button onClick={() => {
+        setActiveSection(to); setTimeout(() => scroller.scrollTo(to, { smooth: true, duration: 500 }), 50);
+      }}>
+        <p className=" relative pb-1
     cursor-pointer
     after:absolute
     after:left-1/2
@@ -27,7 +30,7 @@ export default function NavItem({ to, children }: NavItemProps) {
     hover:text-[var(--text-h)]"
         >
           {children}</p>
-      </Link>
+      </button>
     </li>
   );
 }

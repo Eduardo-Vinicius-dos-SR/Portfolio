@@ -8,6 +8,7 @@ import { LuMessageCircleMore, LuSparkles } from "react-icons/lu";
 import { PiStudent } from "react-icons/pi";
 import { SiReact } from "react-icons/si";
 import { CanvasTexture, Group } from "three";
+import { useSection, type SectionKey } from "../../context/SectionContext";
 
 type FaceData = {
     key: string;
@@ -28,7 +29,7 @@ const FACES: FaceData[] = [
     // adicionar color
 ]
 
-function CubeFace({ data, hoveredKey, setHoveredKey, onSelect, activeKey }: { data: FaceData; hoveredKey: string | null; setHoveredKey: (k: string | null) => void; onSelect: (face: FaceData) => void; activeKey: string | null }) {
+function CubeFace({ data, hoveredKey, setHoveredKey, onSelect, activeSection }: { data: FaceData; hoveredKey: string | null; setHoveredKey: (k: string | null) => void; onSelect: (face: FaceData) => void; activeSection: string | null }) {
     const Icon = data.icon
     return (
         <mesh
@@ -40,7 +41,7 @@ function CubeFace({ data, hoveredKey, setHoveredKey, onSelect, activeKey }: { da
             <planeGeometry args={[3, 3]} />
             <meshBasicMaterial transparent opacity={0} />
             <Html center occlude={false} style={{ pointerEvents: "none" }}>
-                <div className={`flex flex-col items-center transition-opacity duration-300 ${activeKey == data.key ? "opacity-100" : hoveredKey == data.key ? "opacity-100" : "opacity-0"}`}>
+                <div className={`flex flex-col items-center transition-opacity duration-300 ${activeSection == data.key ? "opacity-100" : hoveredKey == data.key ? "opacity-100" : "opacity-0"}`}>
                     <Icon color="yellow" size={50} />
                     <p>{data.name}</p>
                 </div>
@@ -77,13 +78,13 @@ function useGradientTexture() {
     }, [])
 }
 
-function Cube({ targetRef, rotRef, idleRef, dragging, onSelect, activeKey, hoveredKey, setHoveredKey, onPointerDown }: {
+function Cube({ targetRef, rotRef, idleRef, dragging, onSelect, activeSection, hoveredKey, setHoveredKey, onPointerDown }: {
     targetRef: React.RefObject<{ x: number; y: number } | null>;
     rotRef: React.RefObject<{ x: number; y: number }>;
     idleRef: React.RefObject<boolean>;
     dragging: boolean;
     onSelect: (face: FaceData) => void;
-    activeKey: string | null;
+    activeSection: string | null;
     hoveredKey: string | null;
     setHoveredKey: (key: string | null) => void;
     onPointerDown: (e: React.PointerEvent) => void;
@@ -102,7 +103,7 @@ function Cube({ targetRef, rotRef, idleRef, dragging, onSelect, activeKey, hover
                 rotRef.current = { ...t };
                 targetRef.current = null
             }
-        } else if (idleRef.current && !dragging && !activeKey) {
+        } else if (idleRef.current && !dragging && !activeSection) {
             rotRef.current.y += 0.01;
         }
         cube.current.rotation.x = rotRef.current.x;
@@ -116,15 +117,16 @@ function Cube({ targetRef, rotRef, idleRef, dragging, onSelect, activeKey, hover
                 <meshStandardMaterial map={gradientTexture} />
             </mesh>
             {FACES.map((face) => (
-                <CubeFace key={face.key} data={face} hoveredKey={hoveredKey} setHoveredKey={setHoveredKey} onSelect={onSelect} activeKey={activeKey} />
+                <CubeFace key={face.key} data={face} hoveredKey={hoveredKey} setHoveredKey={setHoveredKey} onSelect={onSelect} activeSection={activeSection} />
             ))}
         </group>
     )
 }
 
 export default function InteractiveCube() {
+    const { activeSection, setActiveSection } = useSection();
+
     const targetRef = useRef<{ x: number; y: number } | null>(null)
-    const [activeKey, setActiveKey] = useState<string | null>(null)
     const movedRef = useRef(false);
     const idleTimer = useRef<number | null>(null);
     const [hoveredKey, setHoveredKey] = useState<string | null>(null)
@@ -137,12 +139,21 @@ export default function InteractiveCube() {
         }, 12000)
     }
 
+    useEffect(() => {
+        if (!activeSection) return;
+        const face = FACES.find((face) => face.key === activeSection);
+        if (!face) {return};
+
+        idleRef.current = false;
+        targetRef.current = { x: face.snap[0], y: face.snap[1] };
+        scheduleIdleResume()
+    }, [activeSection]);
 
     const handleSelectFace = (face: FaceData) => {
         idleRef.current = false;
         targetRef.current = { x: face.snap[0], y: face.snap[1] };
         scheduleIdleResume()
-        setActiveKey(face.key)
+        setActiveSection(face.key as SectionKey)
     }
 
     const rotRef = useRef({ x: -0.3, y: -0.4 });
@@ -167,7 +178,7 @@ export default function InteractiveCube() {
             if (!movedRef.current && (Math.abs(dx) + Math.abs(dy) > 4)) {
                 movedRef.current = true;
                 targetRef.current = null;
-                setActiveKey(null)
+                setActiveSection(null)
             }
 
             scheduleIdleResume();
@@ -195,19 +206,19 @@ export default function InteractiveCube() {
     const hoveringCube = hoveredKey !== null;
 
     return (
-        <div className="w-full flex flex-col items-center gap-6 pt-6 pb-12 backdrop-blur-lg border-t  border-white/20">
+        <div className="w-full flex flex-col items-center gap-6 pt-6 pb-35  border-t border-white/20 bg-white/3">
             <div className="h-160 w-200"
                 style={{ touchAction: "none", cursor: dragging ? "grabbing" : hoveringCube ? "grab" : "default" }}>
                 <Canvas camera={{ position: [0, 0, 8], fov: 65 }}>
                     <ambientLight />
                     <directionalLight position={[3, 4, 5]} />
-                    <Cube targetRef={targetRef} rotRef={rotRef} onPointerDown={onPointerDown} idleRef={idleRef} dragging={dragging} onSelect={handleSelectFace} activeKey={activeKey} hoveredKey={hoveredKey} setHoveredKey={setHoveredKey} />
+                    <Cube targetRef={targetRef} rotRef={rotRef} onPointerDown={onPointerDown} idleRef={idleRef} dragging={dragging} onSelect={handleSelectFace} activeSection={activeSection} hoveredKey={hoveredKey} setHoveredKey={setHoveredKey} />
                 </Canvas>
             </div>
 
             <div className="flex gap-5 rounded-2x1 p-6 text-sm">
                 {FACES.map((face, index) => {
-                    const isActive = activeKey == face.key
+                    const isActive = activeSection == face.key
                     return (
                         <button key={index} onClick={() => { handleSelectFace(FACES[index]); }}
                             onMouseEnter={() => setHoveredKey(face.key)}

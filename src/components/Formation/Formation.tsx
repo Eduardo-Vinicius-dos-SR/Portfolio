@@ -1,6 +1,6 @@
-export default function Formation({active= false}) {
+export default function Formation() {
     return(
-        <section id="formation" className={`${active ? 'flex' : 'hidden'} flex-col items-center justify-center gap-4 p-6 text-center`}>
+        <section id="formation" className="flex flex-col items-center justify-center gap-4 p-6 text-center">
         </section>
     )
 }

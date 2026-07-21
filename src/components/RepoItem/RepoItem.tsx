@@ -25,7 +25,7 @@ export default function RepoItem({ repo }: { repo: Repo }) {
 
     return (
         <li key={repo.id} className='min-w-40'>
-            <div className='flex flex-col gap-5 rounded-2xl bg-[var(--social-bg)] p-8 '>
+            <div className='h-full flex flex-col gap-8 rounded-2xl bg-[var(--social-bg)] p-8 '>
                 <h2 className='text-xl font-bold pb-2 px-4 truncate' style={{ fontSize: "clamp(0.75rem, 5cqw, 1.25rem)" }}><a href={repo.html_url} target='_blank' rel="noreferrer" className='relative pb-1 cursor-pointer after:absolute after:left-1/2 after:bottom-0 after:h-[2px] after:w-0 after:-translate-x-1/2 after:bg-[var(--text-h)] after:transition-all
     after:duration-300 hover:after:w-full hover:text-[var(--text-h)]'>{repo.name}</a></h2>
                 {repo.homepage && (
