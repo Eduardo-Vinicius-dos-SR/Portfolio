@@ -209,7 +209,7 @@ export default function InteractiveCube() {
                 {FACES.map((face, index) => {
                     const isActive = activeKey == face.key
                     return (
-                        <button onClick={() => { handleSelectFace(FACES[index]); }}
+                        <button key={index} onClick={() => { handleSelectFace(FACES[index]); }}
                             onMouseEnter={() => setHoveredKey(face.key)}
                             onMouseLeave={() => setHoveredKey(null)}
                             className={`flex items-center gap-2 ${isActive ? "" : hoveredKey == face.key ? "text-yellow-400" : ""} duration-300ms ease-in transition-all rounded-2xl border py-1 px-2 ${isActive ? "text-[var(--accent)]" : "text-[var(--text-h)]"} cursor-pointer`} >
