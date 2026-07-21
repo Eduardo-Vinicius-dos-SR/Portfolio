@@ -1,11 +1,7 @@
 import { scroller } from "react-scroll";
-import type { ReactNode } from "react";
-import { useSection, type SectionKey } from "../../context/SectionContext";
+import { useSection } from "../../context/SectionContext";
+import type { NavItemProps } from "../../interfaces/NavItemProps";
 
-interface NavItemProps {
-  to: SectionKey;
-  children: ReactNode;
-}
 
 export default function NavItem({ to, children }: NavItemProps) {
   const { setActiveSection } = useSection()

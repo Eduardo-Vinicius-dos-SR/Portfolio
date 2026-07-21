@@ -1,9 +1,15 @@
-
+import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
+import ContactItem from "../ContactItem/ContactItem";
 
 export default function Contact() {
-    return(
-        <section id="contact" className="flex flex-col items-center justify-center gap-4 p-6 text-center">
-            
+    return (
+        <section id="contact" className="min-h-[921px] flex flex-col items-start gap-4 text-center p-20">
+            <h2 className='text-3xl font-bold text-center self-center'>Meus contatos</h2>
+            <ul className='flex flex-wrap justify-center gap-24 p-20'>
+                <ContactItem href="https://www.linkedin.com/in/eduardo-vinícius-dos-santos-r-719955336/" title="LinkedIn" description="Acesse meu perfil no LinkedIn" ><FaLinkedin /></ContactItem>
+                <ContactItem href="https://github.com/Eduardo-Vinicius-dos-SR/" title="GitHub" description="Veja meu trabalho no GitHub" ><FaGithub /></ContactItem>
+                <ContactItem href="mailto:eduardovdsr@email.com?subject=Contato%20pelo%20portfólio&body=Olá,%20Eduardo!" title="Email" description="Envie-me um e-mail" ><FaEnvelope /></ContactItem>
+            </ul>
         </section>
     )
 }

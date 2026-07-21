@@ -28,7 +28,7 @@ export default function Projects() {
     }, [])
 
     return (
-        <section id="projects" className="flex flex-col bg-[#0A0A23] p-20">
+        <section id="projects" className="min-h-[921px] flex flex-col bg-[#0A0A23] p-20">
             <h2 className='text-3xl font-bold text-center'>Meus Projetos</h2>
             <ul className='flex justify-between gap-14 p-20'>
                 {repos.map(repo => <RepoItem key={repo.id} repo={repo} />)}

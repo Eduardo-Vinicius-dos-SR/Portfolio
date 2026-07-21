@@ -142,7 +142,7 @@ export default function InteractiveCube() {
     useEffect(() => {
         if (!activeSection) return;
         const face = FACES.find((face) => face.key === activeSection);
-        if (!face) {return};
+        if (!face) { return };
 
         idleRef.current = false;
         targetRef.current = { x: face.snap[0], y: face.snap[1] };
@@ -178,7 +178,6 @@ export default function InteractiveCube() {
             if (!movedRef.current && (Math.abs(dx) + Math.abs(dy) > 4)) {
                 movedRef.current = true;
                 targetRef.current = null;
-                setActiveSection(null)
             }
 
             scheduleIdleResume();
@@ -206,7 +205,7 @@ export default function InteractiveCube() {
     const hoveringCube = hoveredKey !== null;
 
     return (
-        <div className="w-full flex flex-col items-center gap-6 pt-6 pb-35  border-t border-white/20 bg-white/3">
+        <div className="w-full flex flex-col items-center gap-6 pt-6 pb-35 border-t border-white/20 bg-white/3">
             <div className="h-160 w-200"
                 style={{ touchAction: "none", cursor: dragging ? "grabbing" : hoveringCube ? "grab" : "default" }}>
                 <Canvas camera={{ position: [0, 0, 8], fov: 65 }}>
@@ -220,7 +219,9 @@ export default function InteractiveCube() {
                 {FACES.map((face, index) => {
                     const isActive = activeSection == face.key
                     return (
-                        <button key={index} onClick={() => { handleSelectFace(FACES[index]); }}
+                        <button key={index} onClick={() => {
+                            handleSelectFace(FACES[index]);
+                        }}
                             onMouseEnter={() => setHoveredKey(face.key)}
                             onMouseLeave={() => setHoveredKey(null)}
                             className={`flex items-center gap-2 ${isActive ? "" : hoveredKey == face.key ? "text-yellow-400" : ""} duration-300ms ease-in transition-all rounded-2xl border py-1 px-2 ${isActive ? "text-[var(--accent)]" : "text-[var(--text-h)]"} cursor-pointer`} >
