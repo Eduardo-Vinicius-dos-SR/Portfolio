@@ -21,7 +21,7 @@ export default function Hero() {
                     </p>
                 </div>
 
-                <div className='flex flex-col text-2xl items-center gap-6'><p>SCROLL</p><FaArrowDown className='animate-bounce-blink' /></div>
+                <div className='flex flex-col text-2xl items-center gap-8'><p>SCROLL</p><FaArrowDown className='animate-(--animate-bounce-blink)' /></div>
             </div>
             <InteractiveCube />
 

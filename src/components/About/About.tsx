@@ -1,4 +1,9 @@
 import { IoPersonOutline } from "react-icons/io5";
+import TechCard from "../TechCard/TechCard";
+import { FaCss3, FaGitAlt, FaHtml5, FaJs, FaReact } from "react-icons/fa";
+import { TbBrandTypescript } from "react-icons/tb";
+import { FiFigma } from "react-icons/fi";
+import { RiTailwindCssFill } from "react-icons/ri";
 
 export default function About() {
     return (
@@ -10,6 +15,23 @@ export default function About() {
                 <p> Gosto de transformar ideias em <span className="text-[var(--text-h)]">interfaces intuitivas</span> e <span className="text-[var(--text-h)]">agradáveis de usar</span>. Trabalho principalmente com <span className="text-[var(--text-h)]">React</span> e <span className="text-[var(--text-h)]">TypeScript</span> no front-end e estou ampliando meus conhecimentos em <span className="text-[var(--text-h)]">Prisma</span> para desenvolver aplicações completas, do banco de dados até a interface.</p>
                 <p> O que mais me motiva é dar vida a uma interface. Acredito que pequenos detalhes, como animações, transições e a forma como a aplicação responde às interações do usuário, fazem toda a diferença entre um site que apenas funciona e outro que transmite qualidade e cuidado. É justamente essa atenção aos detalhes que procuro colocar em cada projeto que desenvolvo.</p>
             </div>
+            <div className="mt-16">
+                <h3 className="mb-8 text-2xl font-semibold text-center text-[var(--text-h)]">
+                    Tecnologias que utilizo
+                </h3>
+
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
+                    <TechCard icon={<FaReact />} title="React" color="text-sky-400" />
+                    <TechCard icon={<TbBrandTypescript />} title="TypeScript" color="text-blue-500" />
+                    <TechCard icon={<FaJs />} title="JavaScript" color="text-yellow-400" />
+                    <TechCard icon={<RiTailwindCssFill />} title="Tailwind CSS" color="text-cyan-400" />
+                    <TechCard icon={<FaHtml5 />} title="HTML5" color="text-orange-500" />
+                    <TechCard icon={<FaCss3 />} title="CSS3" color="text-blue-400" />
+                    <TechCard icon={<FiFigma />} title="Figma" color="text-pink-500" />
+                    <TechCard icon={<FaGitAlt />} title="Git" color="text-red-500" />
+                </div>
+            </div>
+
         </section>
     )
 }

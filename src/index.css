@@ -27,26 +27,27 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-@theme {
+/* animations */
+:root {
   --animate-bounce-blink: bounce-blink 2s ease-in-out infinite;
+}
 
-  @keyframes bounce-blink {
+@keyframes bounce-blink {
 
-    0%,
-    100% {
-      transform: translateY(0);
-      opacity: 1;
-    }
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 
-    50% {
-      transform: translateY(-20px);
-      opacity: 1;
-    }
+  50% {
+    transform: translateY(-20px);
+    opacity: 1;
+  }
 
-    75% {
-      transform: translateY(0);
-      opacity: 0.3;
-    }
+  75% {
+    transform: translateY(0);
+    opacity: 0.3;
   }
 }
 
