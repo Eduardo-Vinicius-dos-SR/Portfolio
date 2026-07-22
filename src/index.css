@@ -1,15 +1,17 @@
 @import "tailwindcss";
 
-:root {
+:root[data-theme="light"] {
   --text: #6b6375;
   --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
+  --bg: #d4d3d3;
+  --border: #afafaf;
+  --code-bg: #f4f4ec;
+  --accent: #3831ff;
   --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
+  --accent-border: rgba(170, 59, 255, 0.3);
+  --social-bg: rgba(244, 236, 238, 0.5);
+  --yellow: rgb(250, 21, 21);
+  --cube-bg: rgba(0, 0, 0, 0.05);
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
@@ -17,26 +19,21 @@
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
   color: var(--text);
   background: var(--bg);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
 }
 
 @theme {
   --animate-bounce-blink: bounce-blink 2s ease-in-out infinite;
 
   @keyframes bounce-blink {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: translateY(0);
       opacity: 1;
     }
@@ -53,21 +50,42 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
+:root[data-theme="dark"] {
+  --text: #9ca3af;
+  --text-h: #f3f4f6;
+  --bg: #16171d;
+  --border: #42434a;
+  --code-bg: #1f2028;
+  --accent: #c084fc;
+  --accent-bg: rgba(192, 132, 252, 0.15);
+  --accent-border: rgba(192, 132, 252, 0.5);
+  --social-bg: rgba(47, 48, 58, 0.5);
+  --yellow: rgb(250 204 21);
+  --cube-bg: rgba(255, 255, 255, 0.03);
+  --shadow:
+    rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
 }
+
+
+:root[data-theme="cosmos"] {
+  --text: #9ca3af;
+  --text-h: #f3f4f6;
+  --bg: linear-gradient(162deg,
+      rgba(28, 2, 2, 1) 1%,
+      rgba(7, 7, 46, 1) 58%,
+      rgba(35, 7, 61, 1) 92%);
+  --border: #42434a;
+  --code-bg: #1f2028;
+  --accent: #c084fc;
+  --accent-bg: rgba(192, 132, 252, 0.15);
+  --accent-border: rgba(192, 132, 252, 0.5);
+  --yellow: rgb(250 204 21);
+  --social-bg: rgba(47, 48, 58, 0.5);
+  --cube-bg: rgba(255, 255, 255, 0.03);
+  --shadow:
+    rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+}
+
 
 body {
   margin: 0;

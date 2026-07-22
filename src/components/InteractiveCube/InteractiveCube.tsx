@@ -35,7 +35,7 @@ function CubeFace({ data, hoveredKey, setHoveredKey, onSelect, activeSection }: 
             <Html center occlude={false} zIndexRange={[10, 0]} style={{ pointerEvents: "none" }}>
                 <div className={`flex flex-col items-center transition-opacity duration-300 ${activeSection == data.key ? "opacity-100" : hoveredKey == data.key ? "opacity-100" : "opacity-0"}`}>
                     <Icon className="z-50" color="yellow" size={50} />
-                    <p>{data.name}</p>
+                    <p className="text-[#9a999a]">{data.name}</p>
                 </div>
             </Html>
         </mesh>
@@ -197,8 +197,8 @@ export default function InteractiveCube() {
     const hoveringCube = hoveredKey !== null;
 
     return (
-        <div className="w-full flex flex-col items-center gap-6 pt-6 pb-35 border-t border-white/20 bg-white/3">
-            <div className="h-160 w-200"
+        <div className="w-full flex flex-col items-center gap-6 pt-6 pb-35 border-t border-[var(--border)] bg-[var(--cube-bg)]">
+            <div className="h-160 w-200 m-20"
                 style={{ touchAction: "none", cursor: dragging ? "grabbing" : hoveringCube ? "grab" : "default" }}>
                 <Canvas camera={{ position: [0, 0, 8], fov: 65 }}>
                     <ambientLight />
@@ -207,7 +207,7 @@ export default function InteractiveCube() {
                 </Canvas>
             </div>
 
-            <div className="flex gap-5 rounded-2x1 p-6 text-sm">
+            <div className="flex gap-5 rounded-2x1 p-6 text-base">
                 {FACES.map((face, index) => {
                     const isActive = activeSection == face.key
                     return (
@@ -216,8 +216,9 @@ export default function InteractiveCube() {
                         }}
                             onMouseEnter={() => setHoveredKey(face.key)}
                             onMouseLeave={() => setHoveredKey(null)}
-                            className={`flex items-center gap-2 ${isActive ? "" : hoveredKey == face.key ? "text-yellow-400" : ""} duration-300ms ease-in transition-all rounded-2xl border py-1 px-2 ${isActive ? "text-[var(--accent)]" : "text-[var(--text-h)]"} cursor-pointer`} >
-                            {index + 1} {<face.icon />} {face.name}
+                            aria-label={`Abrir seção de ${face.name}`}
+                            className={`flex items-center gap-2 rounded-3xl border py-1 px-3 transition-all duration-300 ease-in cursor-pointer ${isActive ? "text-[var(--accent)]" : hoveredKey === face.key ? "text-[var(--yellow)]" : "text-[var(--text-h)]"}`}>
+                            {index + 1} <face.icon /> {face.name}
                         </button>)
                 })}
             </div>

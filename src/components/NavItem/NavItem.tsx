@@ -3,14 +3,15 @@ import { useSection } from "../../context/SectionContext";
 import type { NavItemProps } from "../../interfaces/NavItemProps";
 
 
-export default function NavItem({ to, children }: NavItemProps) {
+export default function NavItem({ to, children, name }: NavItemProps) {
   const { setActiveSection } = useSection()
 
   return (
     <li>
-      <button onClick={() => {
-        setActiveSection(to); setTimeout(() => scroller.scrollTo(to, { smooth: true, duration: 500 }), 50);
-      }}>
+      <button aria-label={`Abrir seção de ${name}`}
+        onClick={() => {
+          setActiveSection(to); setTimeout(() => scroller.scrollTo(to, { smooth: true, duration: 500 }), 50);
+        }}>
         <p className=" relative pb-1
     cursor-pointer
     after:absolute

@@ -81,9 +81,10 @@ Este projeto tem como objetivo servir como meu portfólio pessoal, reunindo proj
 - [x] Desenvolver a seção Hero
 - [x] Desenvolver a seção Sobre
 - [x] Desenvolver a seção Projetos
-- [ ] Desenvolver a seção Habilidades
+- [x] Desenvolver a seção Habilidades
 - [x] Desenvolver a seção Contato
 - [x] Adicionar animações com Framer Motion
-- [ ] Implementar modo claro/escuro
+- [x] Implementar modo claro/escuro
+- [ ] Implementar Idioma
 - [ ] Implementar responsividade
 - [ ] Publicar o projeto na Vercel

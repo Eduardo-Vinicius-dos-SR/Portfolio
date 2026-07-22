@@ -2,8 +2,8 @@ import { IoPersonOutline } from "react-icons/io5";
 
 export default function About() {
     return (
-        <section id="about" className="min-h-[921px] flex flex-col items-center gap-4 p-20 text-center">
-            <h2 className='flex justify-center text-3xl font-bold text-center self-center'><IoPersonOutline className='mr-5 text-4xl' /> Sobre mim</h2>
+        <section id="about" className="min-h-[921px] flex flex-col items-center gap-4 py-20 px-40 text-center">
+            <h2 className='flex justify-center text-3xl font-bold text-center self-center gap-5'><IoPersonOutline className='text-4xl' /> Sobre mim</h2>
             <div className="flex flex-col gap-4 text-left text-lg indent-8 py-20 px-30">
                 <p> Me chamo <span className="text-[var(--text-h)]">Eduardo Vinícius dos Santos Rodrigues</span>, sou estudante da área de <span className="text-[var(--text-h)]">front-end</span> e <span className="text-[var(--text-h)]">back-end</span>. Cresci cercado pelo mundo digital, que sempre despertou minha curiosidade. Cada site, aplicativo ou jogo que eu usava me fazia pensar em como tudo aquilo funcionava por trás da tela. Hoje, meu objetivo é justamente construir essas experiências, entender cada etapa do processo e fazer parte de quem as cria, e não apenas de quem as utiliza.</p>
                 <p> Fui formado pela <span className="text-[var(--text-h)]">DevQuest</span>, da <a className="text-[var(--accent)]" href="https://www.instagram.com/devemdobro/" target="_blank" rel="noreferrer">DevEmDobro</a>, onde tive a oportunidade de aprender com excelentes professores. Foi lá que construí uma base em lógica de programação, uma base nas principais tecnologias que utilizo até hoje e boas práticas.</p>

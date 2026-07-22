@@ -4,9 +4,9 @@ import { LuMessageCircleMore } from "react-icons/lu";
 
 export default function Contact() {
     return (
-        <section id="contact" className="min-h-[921px] flex flex-col items-start gap-4 text-center p-20">
-            <h2 className='flex justify-center text-3xl font-bold text-center self-center'><LuMessageCircleMore className='mr-5 text-4xl' /> Meus contatos</h2>
-            <ul className='flex flex-wrap justify-center gap-24 p-20'>
+        <section id="contact" className="min-h-[921px] flex flex-col gap-4 text-center p-20">
+            <h2 className='flex justify-center text-3xl font-bold text-center gap-5'><LuMessageCircleMore className='text-4xl' /> Meus contatos</h2>
+            <ul className='flex flex-wrap justify-center items-center gap-25 py-20 px-40'>
                 <ContactItem href="https://www.linkedin.com/in/eduardo-vinícius-dos-santos-r-719955336/" title="LinkedIn" description="Acesse meu perfil no LinkedIn" ><FaLinkedin /></ContactItem>
                 <ContactItem href="https://github.com/Eduardo-Vinicius-dos-SR/" title="GitHub" description="Veja meu trabalho no GitHub" ><FaGithub /></ContactItem>
                 <ContactItem href="mailto:eduardovdsr@email.com?subject=Contato%20pelo%20portfólio&body=Olá,%20Eduardo!" title="Email" description="Envie-me um e-mail" ><FaEnvelope /></ContactItem>

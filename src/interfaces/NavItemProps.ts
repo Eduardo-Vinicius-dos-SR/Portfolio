@@ -4,4 +4,5 @@ import { type SectionKey } from "../context/SectionContext";
 export interface NavItemProps {
   to: SectionKey;
   children: ReactNode;
+  name: string;
 }
