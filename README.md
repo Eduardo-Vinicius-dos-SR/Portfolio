@@ -85,6 +85,6 @@ Este projeto tem como objetivo servir como meu portfólio pessoal, reunindo proj
 - [x] Desenvolver a seção Contato
 - [x] Adicionar animações com Framer Motion
 - [x] Implementar modo claro/escuro
-- [ ] Implementar Idioma
+- [x] Implementar Idioma
 - [ ] Implementar responsividade
 - [ ] Publicar o projeto na Vercel

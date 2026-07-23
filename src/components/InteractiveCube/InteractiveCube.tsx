@@ -5,21 +5,25 @@ import { BsCodeSlash } from "react-icons/bs";
 import { IoPersonOutline } from "react-icons/io5";
 import { LuMessageCircleMore, LuSparkles } from "react-icons/lu";
 import { PiStudent } from "react-icons/pi";
-import { SiReact } from "react-icons/si";
+import { FaHammer } from "react-icons/fa";
 import { CanvasTexture, Group } from "three";
 import { useSection, type SectionKey } from "../../context/SectionContext";
 import type { FaceData } from "../../types/faceData";
+import { useTranslation } from "react-i18next";
 
 
-const FACES: FaceData[] = [
-    { key: "projects", position: [0, 0, 1.5], rotation: [0, 0, 0], snap: [0, 0], icon: BsCodeSlash, name: "Projetos" },
-    { key: "contact", position: [1.5, 0, 0], rotation: [0, Math.PI / 2, 0], snap: [0, -Math.PI / 2], icon: LuMessageCircleMore, name: "Contato" },
-    { key: "about", position: [0, 1.5, 0], rotation: [-Math.PI / 2, 0, 0], snap: [Math.PI / 2, 0], icon: IoPersonOutline, name: "Sobre" },
-    { key: "technologies", position: [-1.5, 0, 0], rotation: [0, -Math.PI / 2, 0], snap: [0, Math.PI / 2], icon: SiReact, name: "Tecnologias" },
-    { key: "formation", position: [0, 0, -1.5], rotation: [0, Math.PI, 0], snap: [0, Math.PI], icon: PiStudent, name: "Formação" },
-    { key: "skills", position: [0, -1.5, 0], rotation: [Math.PI / 2, 0, 0], snap: [-Math.PI / 2, 0], icon: LuSparkles, name: "Skills" },
-    // adicionar color
-]
+function getFaces(t: (key: string) => string): FaceData[] {
+
+    return [
+        { key: "projects", position: [0, 0, 1.5], rotation: [0, 0, 0], snap: [0, 0], icon: BsCodeSlash, name: t("interactiveCube.projects") },
+        { key: "contact", position: [1.5, 0, 0], rotation: [0, Math.PI / 2, 0], snap: [0, -Math.PI / 2], icon: LuMessageCircleMore, name: t("interactiveCube.contact") },
+        { key: "about", position: [0, 1.5, 0], rotation: [-Math.PI / 2, 0, 0], snap: [Math.PI / 2, 0], icon: IoPersonOutline, name: t("interactiveCube.about") },
+        { key: "services", position: [-1.5, 0, 0], rotation: [0, -Math.PI / 2, 0], snap: [0, Math.PI / 2], icon: FaHammer, name: t("interactiveCube.services") },
+        { key: "formation", position: [0, 0, -1.5], rotation: [0, Math.PI, 0], snap: [0, Math.PI], icon: PiStudent, name: t("interactiveCube.formation") },
+        { key: "skills", position: [0, -1.5, 0], rotation: [Math.PI / 2, 0, 0], snap: [-Math.PI / 2, 0], icon: LuSparkles, name: t("interactiveCube.skills") },
+        // adicionar color
+    ]
+}
 
 function CubeFace({ data, hoveredKey, setHoveredKey, onSelect, activeSection }: { data: FaceData; hoveredKey: string | null; setHoveredKey: (k: string | null) => void; onSelect: (face: FaceData) => void; activeSection: string | null }) {
     const Icon = data.icon
@@ -70,7 +74,8 @@ function useGradientTexture() {
     }, [])
 }
 
-function Cube({ targetRef, rotRef, idleRef, dragging, onSelect, activeSection, hoveredKey, setHoveredKey, onPointerDown }: {
+function Cube({ faces, targetRef, rotRef, idleRef, dragging, onSelect, activeSection, hoveredKey, setHoveredKey, onPointerDown }: {
+    faces: FaceData[];
     targetRef: React.RefObject<{ x: number; y: number } | null>;
     rotRef: React.RefObject<{ x: number; y: number }>;
     idleRef: React.RefObject<boolean>;
@@ -108,7 +113,7 @@ function Cube({ targetRef, rotRef, idleRef, dragging, onSelect, activeSection, h
                 <boxGeometry args={[3, 3, 3]} />
                 <meshStandardMaterial map={gradientTexture} />
             </mesh>
-            {FACES.map((face) => (
+            {faces.map((face) => (
                 <CubeFace key={face.key} data={face} hoveredKey={hoveredKey} setHoveredKey={setHoveredKey} onSelect={onSelect} activeSection={activeSection} />
             ))}
         </group>
@@ -116,6 +121,9 @@ function Cube({ targetRef, rotRef, idleRef, dragging, onSelect, activeSection, h
 }
 
 export default function InteractiveCube() {
+    const { t } = useTranslation();
+
+    const FACES = useMemo(() => getFaces(t), [t]);
     const { activeSection, setActiveSection } = useSection();
 
     const targetRef = useRef<{ x: number; y: number } | null>(null)
@@ -203,7 +211,7 @@ export default function InteractiveCube() {
                 <Canvas camera={{ position: [0, 0, 8], fov: 65 }}>
                     <ambientLight />
                     <directionalLight position={[3, 4, 5]} />
-                    <Cube targetRef={targetRef} rotRef={rotRef} onPointerDown={onPointerDown} idleRef={idleRef} dragging={dragging} onSelect={handleSelectFace} activeSection={activeSection} hoveredKey={hoveredKey} setHoveredKey={setHoveredKey} />
+                    <Cube faces={FACES} targetRef={targetRef} rotRef={rotRef} onPointerDown={onPointerDown} idleRef={idleRef} dragging={dragging} onSelect={handleSelectFace} activeSection={activeSection} hoveredKey={hoveredKey} setHoveredKey={setHoveredKey} />
                 </Canvas>
             </div>
 
@@ -212,11 +220,13 @@ export default function InteractiveCube() {
                     const isActive = activeSection == face.key
                     return (
                         <button key={index} onClick={() => {
-                            handleSelectFace(FACES[index]);
+                            handleSelectFace(face);
                         }}
                             onMouseEnter={() => setHoveredKey(face.key)}
                             onMouseLeave={() => setHoveredKey(null)}
-                            aria-label={`Abrir seção de ${face.name}`}
+                            aria-label={t("accessibility.openSection", {
+                                section: face.name,
+                            })}
                             className={`flex items-center gap-2 rounded-3xl border py-1 px-3 transition-all duration-300 ease-in cursor-pointer ${isActive ? "text-[var(--accent)]" : hoveredKey === face.key ? "text-[var(--yellow)]" : "text-[var(--text-h)]"}`}>
                             {index + 1} <face.icon /> {face.name}
                         </button>)

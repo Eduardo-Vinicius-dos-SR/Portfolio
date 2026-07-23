@@ -1,0 +1,161 @@
+{
+    "loading": "Cargando",
+    "accessibility": {
+        "linkedin": "Ir al perfil de Eduardo Vinícius en LinkedIn",
+        "changeLanguage": "Cambiar el idioma del sitio",
+        "changeTheme": "Cambiar el tema del sitio",
+        "openSection": "Abrir sección {{section}}"
+    },
+    "header": {
+        "home": "Inicio",
+        "projects": "Proyectos",
+        "about": "Sobre mí",
+        "contact": "Contacto",
+        "accessibility": {
+            "openSection": "Abrir sección {{section}}"
+        }
+    },
+    "hero": {
+        "title": "Me llamo",
+        "subtitle": "Desarrollador Front-end",
+        "welcome": "¡Hola, visitante!",
+        "scroll": "SCROLL",
+        "accessibility": {
+            "open": "Abrir"
+        }
+    },
+    "interactiveCube": {
+        "projects": "Proyectos",
+        "contact": "Contacto",
+        "about": "Sobre mí",
+        "services": "Servicios",
+        "formation": "Formación",
+        "skills": "Habilidades",
+        "openSection": "Abrir sección de {{section}}"
+    },
+    "projects": {
+        "title": "Mis Proyectos",
+        "preview": "Vista previa próximamente",
+        "previewAlt": "Vista previa del sitio",
+        "accessibility": {
+            "openRepository": "Ir al repositorio de {{repository}} en GitHub"
+        }
+    },
+    "contact": {
+        "title": "Mis contactos",
+        "description1": "Visita mi perfil en {{local}}",
+        "description2": "Mira mi trabajo en {{local}}",
+        "emailMessage": "Envíame un correo",
+        "accessibility": {
+            "open": "Abrir"
+        }
+    },
+    "about": {
+        "title": "Sobre mí",
+        "paragraph1": "Me llamo <0>Eduardo Vinícius dos Santos Rodrigues</0>, soy estudiante de <0>front-end</0> y <0>back-end</0>. Crecí rodeado del mundo digital, que siempre despertó mi curiosidad. Cada sitio web, aplicación o juego que usaba me hacía pensar en cómo funcionaba todo detrás de la pantalla. Hoy, mi objetivo es precisamente construir esas experiencias, entender cada etapa del proceso y formar parte de quienes las crean, no solo de quienes las utilizan.",
+        "paragraph2": "Me formé en <0>DevQuest</0>, de <1>DevEmDobro</1>, donde tuve la oportunidad de aprender con excelentes profesores. Fue allí donde construí una base sólida en lógica de programación, en las principales tecnologías que utilizo hasta hoy y en buenas prácticas.",
+        "paragraph3": "Me gusta transformar ideas en <0>interfaces intuitivas</0> y <0>agradables de usar</0>. Trabajo principalmente con <0>React</0> y <0>TypeScript</0> en el front-end y estoy ampliando mis conocimientos en <0>Prisma</0>.",
+        "paragraph4": "Lo que más me motiva es dar vida a una interfaz. Creo que los pequeños detalles, como las animaciones, las transiciones y la forma en que la aplicación responde a las interacciones del usuario, marcan toda la diferencia entre un sitio que simplemente funciona y otro que transmite calidad y cuidado.",
+        "h3": "Tecnologías que utilizo"
+    },
+    "services": {
+        "title": "Mis Servicios",
+        "subtitle": "Lo que puedo desarrollar para ti.",
+        "service1": {
+            "title": "Desarrollo Front-end",
+            "description": "Creación de interfaces modernas, responsivas e intuitivas utilizando HTML, CSS, Tailwind CSS y JavaScript."
+        },
+        "service2": {
+            "title": "Aplicaciones React",
+            "description": "Desarrollo de aplicaciones con React y TypeScript utilizando componentes reutilizables y Context API."
+        },
+        "service3": {
+            "title": "UI & UX",
+            "description": "Transformación de prototipos de Figma en interfaces fieles al diseño, responsivas y accesibles."
+        },
+        "service4": {
+            "title": "Buenas prácticas",
+            "description": "Código limpio, organización de componentes, accesibilidad, responsividad y enfoque en el rendimiento."
+        }
+    },
+    "formation": {
+        "title": "Mi formación",
+        "formation1": "Bachillerato Completo.",
+        "formation2": "Portugués (Nativo)",
+        "formation3": "Curso de <0>Inglés</0> en <1>Duolingo</1>. (Puntuación 86)",
+        "formation4": "Curso de <0>Desarrollo Web Full Stack</0> en <1>DevQuest</1>, de <2>DevEmDobro</2>.",
+        "formation5": "Curso de <0>Lógica de Programación</0> en <1>DevQuest</1>, de <2>DevEmDobro</2>."
+    },
+    "skills": {
+        "title": "Mis habilidades",
+        "hardSkills": "Hard Skills | Habilidades técnicas",
+        "softSkills": "Soft Skills | Habilidades blandas",
+        "languages": {
+            "title": "Lenguajes",
+            "items": [
+                "HTML5",
+                "CSS3",
+                "JavaScript (ES6+)",
+                "TypeScript",
+                "React"
+            ]
+        },
+        "development": {
+            "title": "Desarrollo",
+            "items": [
+                "Consumo de APIs REST",
+                "Fetch API",
+                "Responsive Design",
+                "Mobile First",
+                "Componentización",
+                "SPA (Single Page Applications)",
+                "SEO básico",
+                "Formularios",
+                "Validación de formularios"
+            ]
+        },
+        "tools": {
+            "title": "Herramientas",
+            "items": [
+                "Git",
+                "GitHub",
+                "Vite",
+                "npm",
+                "Figma",
+                "VS Code"
+            ]
+        },
+        "frameworks": {
+            "title": "Frameworks y bibliotecas",
+            "items": [
+                "React",
+                "React Router",
+                "Tailwind CSS",
+                "Framer Motion"
+            ]
+        },
+        "performance": {
+            "title": "Rendimiento",
+            "items": [
+                "Lazy Loading",
+                "Code Splitting"
+            ]
+        },
+        "soft": {
+            "title": "Habilidades",
+            "items": [
+                "Comunicación",
+                "Trabajo en equipo",
+                "Resolución de problemas",
+                "Pensamiento analítico",
+                "Organización",
+                "Gestión del tiempo",
+                "Adaptabilidad",
+                "Aprendizaje continuo",
+                "Atención al detalle",
+                "Inteligencia emocional",
+                "Colaboración"
+            ]
+        }
+    }
+}

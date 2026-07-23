@@ -2,9 +2,11 @@ import { MdOutlineWbSunny } from "react-icons/md";
 import { LuMoon } from "react-icons/lu";
 import { PiPlanetFill } from "react-icons/pi";
 import { useTheme } from "../../context/ThemeContext";
+import { useTranslation } from "react-i18next";
 
 export default function ThemeButton() {
   const { theme, setTheme } = useTheme();
+  const { t } = useTranslation();
 
   const nextTheme = {
     light: "dark",
@@ -19,7 +21,7 @@ export default function ThemeButton() {
   };
 
   return (
-    <button aria-label="Alternar tema do site"
+    <button aria-label={t("accessibility.changeTheme")}
       className="pointer-events-auto text-3xl relative pb-1
     cursor-pointer
     after:absolute

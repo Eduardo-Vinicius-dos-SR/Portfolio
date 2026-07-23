@@ -1,0 +1,161 @@
+{
+  "loading": "Loading",
+  "accessibility": {
+    "linkedin": "Go to Eduardo Vinícius's LinkedIn profile",
+    "changeLanguage": "Change site language",
+    "changeTheme": "Toggle site theme",
+    "openSection": "Open {{section}} section"
+  },
+  "header": {
+    "home": "Home",
+    "projects": "Projects",
+    "about": "About",
+    "contact": "Contact",
+    "accessibility": {
+      "openSection": "Open {{section}} section"
+    }
+  },
+  "hero": {
+    "title": "My name is",
+    "subtitle": "Front-end Developer",
+    "welcome": "Hello, visitor!",
+    "scroll": "SCROLL",
+    "accessibility": {
+      "open": "Open"
+    }
+  },
+  "interactiveCube": {
+    "projects": "Projects",
+    "contact": "Contact",
+    "about": "About",
+    "services": "Services",
+    "formation": "Education",
+    "skills": "Skills",
+    "openSection": "Open {{section}} section"
+  },
+  "projects": {
+    "title": "My Projects",
+    "preview": "Preview coming soon",
+    "previewAlt": "Website preview",
+    "accessibility": {
+      "openRepository": "Go to the {{repository}} repository on GitHub"
+    }
+  },
+  "contact": {
+    "title": "My contacts",
+    "description1": "Check out my profile on {{local}}",
+    "description2": "See my work on {{local}}",
+    "emailMessage": "Send me an email",
+    "accessibility": {
+      "open": "Open"
+    }
+  },
+  "about": {
+    "title": "About me",
+    "paragraph1": "My name is <0>Eduardo Vinícius dos Santos Rodrigues</0>, and I'm a student in <0>front-end</0> and <0>back-end</0> development. I grew up surrounded by the digital world, which always sparked my curiosity. Every website, app, or game I used made me wonder how it all worked behind the screen. Today, my goal is exactly that: to build these experiences, understand every step of the process, and be one of the people who create them, not just one of the people who use them.",
+    "paragraph2": "I graduated from <0>DevQuest</0>, by <1>DevEmDobro</1>, where I had the chance to learn from excellent teachers. That's where I built a foundation in programming logic, the core technologies I still use today, and good practices.",
+    "paragraph3": "I enjoy turning ideas into <0>intuitive</0> and <0>pleasant-to-use interfaces</0>. I work mainly with <0>React</0> and <0>TypeScript</0> on the front-end, and I'm expanding my knowledge of <0>Prisma</0>.",
+    "paragraph4": "What motivates me most is bringing an interface to life. I believe small details — animations, transitions, and how an application responds to user interactions — make all the difference between a site that just works and one that conveys quality and attention to detail.",
+    "h3": "Technologies I use"
+  },
+  "services": {
+    "title": "My Services",
+    "subtitle": "What I can build for you.",
+    "service1": {
+      "title": "Front-end Development",
+      "description": "Building modern, responsive, and intuitive interfaces with HTML, CSS, Tailwind CSS, and JavaScript."
+    },
+    "service2": {
+      "title": "React Applications",
+      "description": "Developing applications with React and TypeScript using reusable components and the Context API."
+    },
+    "service3": {
+      "title": "UI & UX",
+      "description": "Turning Figma prototypes into interfaces that are faithful to the design, responsive, and accessible."
+    },
+    "service4": {
+      "title": "Best Practices",
+      "description": "Clean code, component organization, accessibility, responsiveness, and a focus on performance."
+    }
+  },
+  "formation": {
+    "title": "My Education",
+    "formation1": "Completed High School.",
+    "formation2": "Portuguese (Native)",
+    "formation3": "<0>English</0> course on <1>Duolingo</1>. (Score 86)",
+    "formation4": "<0>Full Stack Web Development</0> course at <1>DevQuest</1>, by <2>DevEmDobro</2>.",
+    "formation5": "<0>Programming Logic</0> course at <1>DevQuest</1>, by <2>DevEmDobro</2>."
+  },
+  "skills": {
+    "title": "My Skills",
+    "hardSkills": "Hard Skills | Technical Skills",
+    "softSkills": "Soft Skills | Behavioral Skills",
+    "languages": {
+      "title": "Languages",
+      "items": [
+        "HTML5",
+        "CSS3",
+        "JavaScript (ES6+)",
+        "TypeScript",
+        "React"
+      ]
+    },
+    "development": {
+      "title": "Development",
+      "items": [
+        "REST API Consumption",
+        "Fetch API",
+        "Responsive Design",
+        "Mobile First",
+        "Componentization",
+        "SPA (Single Page Applications)",
+        "Basic SEO",
+        "Forms",
+        "Form Validation"
+      ]
+    },
+    "tools": {
+      "title": "Tools",
+      "items": [
+        "Git",
+        "GitHub",
+        "Vite",
+        "npm",
+        "Figma",
+        "VS Code"
+      ]
+    },
+    "frameworks": {
+      "title": "Frameworks & Libraries",
+      "items": [
+        "React",
+        "React Router",
+        "Tailwind CSS",
+        "Framer Motion"
+      ]
+    },
+    "performance": {
+      "title": "Performance",
+      "items": [
+        "Lazy Loading",
+        "Code Splitting"
+      ]
+    },
+    "soft": {
+      "title": "Skills",
+      "items": [
+        "Communication",
+        "Teamwork",
+        "Problem Solving",
+        "Analytical Thinking",
+        "Organization",
+        "Time Management",
+        "Adaptability",
+        "Continuous Learning",
+        "Attention to Detail",
+        "Emotional Intelligence",
+        "Collaboration"
+      ]
+    }
+  }
+}

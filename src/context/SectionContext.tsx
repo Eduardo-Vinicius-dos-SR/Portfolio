@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 
-export type SectionKey = "home" | "projects" | "contact" | "about" | "technologies" | "formation" | "skills";
+export type SectionKey = "home" | "projects" | "contact" | "about" | "services" | "formation" | "skills";
 
 type SectionContextValue = {
     activeSection: SectionKey | null;

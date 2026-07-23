@@ -3,19 +3,20 @@ import Header from './components/Header/Header';
 import Hero from './components/Hero/Hero';
 import { useSection } from './context/SectionContext';
 import { lazy, Suspense, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const About = lazy(() => import("./components/About/About"));
 const Contact = lazy(() => import("./components/Contact/Contact"));
 const Formation = lazy(() => import("./components/Formation/Formation"));
 const Skills = lazy(() => import("./components/Skills/Skills"));
 const Projects = lazy(() => import("./components/Projects/Projects"));
-const Technologies = lazy(() => import("./components/Technologies/Technologies"));
+const Services = lazy(() => import("./components/MyServices/Services"));
 
 const SECTION_COMPONENTS: Record<string, React.ReactNode> = {
   projects: <Projects />,
   contact: <Contact />,
   about: <About />,
-  technologies: <Technologies />,
+  services: <Services />,
   formation: <Formation />,
   skills: <Skills />,
 };
@@ -24,12 +25,13 @@ const PRELOADERS = [
   () => import('./components/Projects/Projects'),
   () => import('./components/Contact/Contact'),
   () => import('./components/About/About'),
-  () => import('./components/Technologies/Technologies'),
+  () => import('./components/MyServices/Services'),
   () => import('./components/Formation/Formation'),
   () => import('./components/Skills/Skills'),
 ];
 
 function App() {
+  const { t } = useTranslation();
   const { activeSection } = useSection()
 
   useEffect(() => {
@@ -56,7 +58,7 @@ function App() {
           <motion.div key={activeSection} id={activeSection} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -50 }} transition={{ duration: 0.8 }} onAnimationComplete={() => {
             document.getElementById(activeSection)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }}>
-            <Suspense fallback={<div className="min-h-[921px] flex justify-center items-center text-center text-xl">Carregando...</div>}>
+            <Suspense fallback={<div className="min-h-[921px] flex justify-center items-center text-center text-xl">{t("loading")}</div>}>
               {SECTION_COMPONENTS[activeSection]}
             </Suspense>
           </motion.div>
