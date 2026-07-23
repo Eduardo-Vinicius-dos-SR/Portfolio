@@ -14,8 +14,25 @@ export default function NavItem({ to, children, name }: NavItemProps) {
         section: name,
       })}
         onClick={() => {
-          setActiveSection(to); setTimeout(() => scroller.scrollTo(to, { smooth: true, duration: 500 }), 50);
-        }}>
+          if (to === null) {
+            setActiveSection(null);
+
+            scroller.scrollTo("home", {
+              smooth: true,
+              duration: 500,
+            });
+
+            return;
+          }
+
+          setActiveSection(to);
+
+          scroller.scrollTo(to, {
+            smooth: true,
+            duration: 500,
+          });
+        }}
+      >
         <p className=" relative pb-1
     cursor-pointer
     after:absolute

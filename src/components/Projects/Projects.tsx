@@ -11,7 +11,6 @@ export default function Projects() {
     const { t } = useTranslation();
     const [repos, setRepos] = useState<Repo[]>([])
     useEffect(() => {
-
         const cached = sessionStorage.getItem("repos-cache");
         if (cached) {
             setRepos(JSON.parse(cached));
@@ -29,6 +28,13 @@ export default function Projects() {
             });
         return () => { cancelled = true; };
     }, [])
+
+    useEffect(() => {
+        document.getElementById("projects")?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+        });
+    }, []);
 
     return (
         <section id="projects" className="min-h-[921px] flex flex-col p-20">

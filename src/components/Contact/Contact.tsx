@@ -2,9 +2,17 @@ import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 import ContactItem from "../ContactItem/ContactItem";
 import { LuMessageCircleMore } from "react-icons/lu";
 import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
 
 export default function Contact() {
     const { t } = useTranslation();
+
+    useEffect(() => {
+    document.getElementById("contact")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+    });
+}, []);
 
     return (
         <section id="contact" className="min-h-[921px] flex flex-col gap-4 text-center p-20">

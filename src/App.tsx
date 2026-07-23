@@ -35,19 +35,12 @@ function App() {
   const { activeSection } = useSection()
 
   useEffect(() => {
-    if (activeSection !== 'home') return;
-    requestAnimationFrame(() => {
-      document.getElementById('home')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  }, [activeSection]);
-
-  useEffect(() => {
     const idle = (window as any).requestIdleCallback ?? ((cb: () => void) => setTimeout(cb, 200));
     idle(() => {
       PRELOADERS.forEach((preload) => preload());
     });
   }, []);
-
+  
   return (
     <div className="App text-[var(--text)]" style={{ background: "var(--bg)" }}>
       <Header />
@@ -55,9 +48,7 @@ function App() {
 
       <AnimatePresence mode='wait'>
         {activeSection && SECTION_COMPONENTS[activeSection] && (
-          <motion.div key={activeSection} id={activeSection} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -50 }} transition={{ duration: 0.8 }} onAnimationComplete={() => {
-            document.getElementById(activeSection)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }}>
+          <motion.div key={activeSection} id={activeSection} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -50 }} transition={{ duration: 0.8 }}>
             <Suspense fallback={<div className="min-h-[921px] flex justify-center items-center text-center text-xl">{t("loading")}</div>}>
               {SECTION_COMPONENTS[activeSection]}
             </Suspense>

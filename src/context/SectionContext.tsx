@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 
-export type SectionKey = "home" | "projects" | "contact" | "about" | "services" | "formation" | "skills";
+export type SectionKey = "home" | "projects" | "about" | "contact" | "services" | "formation" | "skills";
 
 type SectionContextValue = {
     activeSection: SectionKey | null;
@@ -11,7 +11,7 @@ const SectionContext = createContext<SectionContextValue | undefined>(undefined)
 
 export function SectionProvider({ children }: { children: ReactNode }) {
     const [activeSection, setActiveSection] = useState<SectionKey | null>(null)
-    return(<SectionContext.Provider value={{activeSection, setActiveSection}}>
+    return (<SectionContext.Provider value={{ activeSection, setActiveSection }}>
         {children}
     </SectionContext.Provider>)
 }

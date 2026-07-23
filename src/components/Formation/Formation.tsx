@@ -1,8 +1,16 @@
+import { useEffect } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { PiStudent } from "react-icons/pi";
 
 export default function Formation() {
     const { t } = useTranslation();
+
+    useEffect(() => {
+    document.getElementById("formation")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+    });
+}, []);
 
     return (
         <section

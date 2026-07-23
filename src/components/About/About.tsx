@@ -5,9 +5,17 @@ import { TbBrandTypescript } from "react-icons/tb";
 import { FiFigma } from "react-icons/fi";
 import { RiTailwindCssFill } from "react-icons/ri";
 import { Trans, useTranslation } from "react-i18next";
+import { useEffect } from "react";
 
 export default function About() {
     const { t } = useTranslation();
+
+    useEffect(() => {
+    document.getElementById("about")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+    });
+}, []);
 
     return (
         <section id="about" className="min-h-[921px] flex flex-col items-center gap-4 py-20 px-40 text-center">

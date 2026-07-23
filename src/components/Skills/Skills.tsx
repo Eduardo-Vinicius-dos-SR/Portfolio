@@ -3,9 +3,17 @@ import { LuSparkles } from "react-icons/lu";
 import { RiComputerLine } from "react-icons/ri";
 import { FaHandsHelping } from "react-icons/fa";
 import SkillItem from "../SkillItem/SkillItem";
+import { useEffect } from "react";
 
 export default function Skills() {
   const { t } = useTranslation();
+
+    useEffect(() => {
+    document.getElementById("skills")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+    });
+}, []);
 
   return (
     <section

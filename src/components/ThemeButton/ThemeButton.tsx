@@ -22,7 +22,7 @@ export default function ThemeButton() {
 
   return (
     <button aria-label={t("accessibility.changeTheme")}
-      className="pointer-events-auto text-3xl relative pb-1
+      className="text-3xl relative pb-1
     cursor-pointer
     after:absolute
     after:left-1/2

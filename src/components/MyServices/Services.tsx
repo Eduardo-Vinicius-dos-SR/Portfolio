@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import {
     FaCode,
@@ -31,6 +32,14 @@ export default function Services() {
             description: t("services.service4.description")
         },
     ];
+    
+        useEffect(() => {
+        document.getElementById("services")?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+        });
+    }, []);
+    
 
     return (
         <section

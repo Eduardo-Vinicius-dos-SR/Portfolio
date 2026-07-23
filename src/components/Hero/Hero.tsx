@@ -1,9 +1,17 @@
 import { FaArrowDown, FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 import InteractiveCube from "../InteractiveCube/InteractiveCube";
 import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
 
 export default function Hero() {
     const { t } = useTranslation();
+
+    useEffect(() => {
+    document.getElementById("home")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+    });
+}, []);
 
     return (
         <main id="home" className="pt-40 relative flex flex-col justify-center items-center gap-25 border-b">
